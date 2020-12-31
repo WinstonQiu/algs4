@@ -1,4 +1,6 @@
-package chapter4;
+package chapter4.undirected;
+
+import chapter4.undirected.Graph;
 
 public abstract class Search {
     protected boolean[] marked;

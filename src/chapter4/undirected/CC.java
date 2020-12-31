@@ -1,4 +1,4 @@
-package chapter4;
+package chapter4.undirected;
 
 import chapter1.Bag;
 import edu.princeton.cs.algs4.In;
