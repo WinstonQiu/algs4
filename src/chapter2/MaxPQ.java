@@ -1,6 +1,6 @@
 package chapter2;
 
-import  edu.princeton.cs.algs4.Stack;
+import edu.princeton.cs.algs4.Stack;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.Transaction;
@@ -17,12 +17,12 @@ public class MaxPQ<Key extends Comparable<Key>> {
         pq = (Key[]) new Comparable[max + 1];
     }
 
-   public MaxPQ(Key[] a) {
-       pq = (Key[]) new Comparable[a.length + 1];
-       for (Key v : a) {
-           this.insert(v);
-       }
-   }
+    public MaxPQ(Key[] a) {
+        pq = (Key[]) new Comparable[a.length + 1];
+        for (Key v : a) {
+            this.insert(v);
+        }
+    }
 
     public void insert(Key v) {
         if (N == pq.length - 1)
@@ -79,10 +79,8 @@ public class MaxPQ<Key extends Comparable<Key>> {
     private void sink(int k) {
         while (2 * k <= N) {
             int j = 2 * k;
-            if (j < N && less(j, j+1))
-                j++;
-            if (!less(k, j))
-                break;
+            if (j < N && less(j, j + 1)) j++;
+            if (!less(k, j)) break;
             exch(k, j);
             k = j;
         }
