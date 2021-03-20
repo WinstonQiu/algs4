@@ -6,10 +6,10 @@ import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdOut;
 
 public class PrimMST implements MST{
-    private Edge[] edgeTo;
-    private double[] distTo;
-    private boolean[] marked;
-    private IndexMinPQ<Double> pq;
+    private final Edge[] edgeTo;          // 距离树最近的边
+    private final double[] distTo;        // distTo[w]=edgeTo[w].weight()
+    private final boolean[] marked;       // 如果v在树中则为true
+    private final IndexMinPQ<Double> pq;  // 有效的横切边
 
     public PrimMST(EdgeWeightedGraph G) {
         edgeTo = new Edge[G.V()];
@@ -21,9 +21,9 @@ public class PrimMST implements MST{
         pq = new IndexMinPQ<>(G.V());
 
         distTo[0] = 0.0;
-        pq.insert(0, 0.0);
+        pq.insert(0, 0.0);              // 用顶点0和权重0初始化pq
         while (!pq.isEmpty()) {
-            visit(G, pq.delMin());
+            visit(G, pq.delMin());          // 将最近的顶点添加到树中
         }
     }
 
@@ -32,7 +32,7 @@ public class PrimMST implements MST{
         for (Edge e : G.adj(v)) {
             int w = e.other(v);
 
-            if (marked[w]) continue;
+            if (marked[w]) continue;        // v-w失效
             if (e.weight() < distTo[w]) {
                 edgeTo[w] = e;
                 distTo[w] = e.weight();
