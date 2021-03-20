@@ -8,9 +8,9 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class LazyPrimMST implements MST {
-    private final boolean[] marked;
-    private final Queue<Edge> mst;
-    private final PriorityQueue<Edge> pq;
+    private final boolean[] marked;  // 最小生成树的顶点
+    private final Queue<Edge> mst;   // 最小生成树的边
+    private final PriorityQueue<Edge> pq; // 横切边，Java默认小根堆
     private double weight = 0;
 
     public LazyPrimMST(EdgeWeightedGraph G) {
@@ -19,16 +19,17 @@ public class LazyPrimMST implements MST {
         pq = new PriorityQueue<>();
         visit(G, 0);
         while (!pq.isEmpty()) {
-            Edge e = pq.remove();
+            Edge e = pq.remove();                   // 从pq中得到权重最小的边
             int v = e.either(), w = e.other(v);
-            if (marked[v] && marked[w]) continue;
-            mst.add(e);
-            weight += e.weight();
-            if (!marked[v]) visit(G, v);
+            if (marked[v] && marked[w]) continue;   // 跳过失效的边
+            mst.add(e);                             // 将边添加到树中
+            weight += e.weight();                   // 增加权重
+            if (!marked[v]) visit(G, v);            // 将顶点(v或w)添加到树中
             if (!marked[w]) visit(G, w);
         }
     }
 
+    // 标记顶点v并将所有连接v和未被标记顶点的边加入pq
     private void visit(EdgeWeightedGraph G, int v) {
         marked[v] = true;
         for (Edge e : G.adj(v)) {
