@@ -67,14 +67,17 @@ public class UF {
         count--;
     }*/
 
-    //加权quick-union
+    // 加权quick-union
 	public int find(int p) {
-	    int ip = p;
-		while (p != id[p]) {
-            p = id[p];
+	    int root = p;
+		while (root != id[root]) root = id[root];
+		// 路径压缩
+		while (id[p] != root) {
+            int t = id[p];
+            id[p] = root;
+            p = t;
         }
-		id[ip] = p;
-		return p;
+		return root;
 	}
 
 	public void union(int p, int q) {
