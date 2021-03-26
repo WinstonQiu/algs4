@@ -1,7 +1,6 @@
 package chapter4.shortestPath;
 
 import edu.princeton.cs.algs4.In;
-import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
 public class CPM {
