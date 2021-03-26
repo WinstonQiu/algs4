@@ -12,7 +12,7 @@ public class DijkstraSP implements SP {
     private final double[] distTo;
     private final IndexMinPQ<Double> pq;
 
-    DijkstraSP(EdgeWeightedDigraph G, int s) {
+    public DijkstraSP(EdgeWeightedDigraph G, int s) {
         edgeTo = new DirectedEdge[G.V()];
         distTo = new double[G.V()];
         pq = new IndexMinPQ<>(G.V());

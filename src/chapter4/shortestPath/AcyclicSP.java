@@ -10,7 +10,7 @@ public class AcyclicSP implements SP {
     private final DirectedEdge[] edgeTo;
     private final double[] distTo;
 
-    AcyclicSP(EdgeWeightedDigraph G, int s) {
+    public AcyclicSP(EdgeWeightedDigraph G, int s) {
         edgeTo = new DirectedEdge[G.V()];
         distTo = new double[G.V()];
 

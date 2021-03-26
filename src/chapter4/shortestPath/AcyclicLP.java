@@ -7,7 +7,7 @@ public class AcyclicLP {
     private final DirectedEdge[] edgeTo;
     private final double[] distTo;
 
-    AcyclicLP(EdgeWeightedDigraph G, int s) {
+    public AcyclicLP(EdgeWeightedDigraph G, int s) {
         edgeTo = new DirectedEdge[G.V()];
         distTo = new double[G.V()];
 

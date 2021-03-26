@@ -3,7 +3,7 @@ package chapter4.shortestPath;
 public class DijkstraAllPairSP {
     private final DijkstraSP[] all;
 
-    DijkstraAllPairSP(EdgeWeightedDigraph G) {
+    public DijkstraAllPairSP(EdgeWeightedDigraph G) {
         all = new DijkstraSP[G.V()];
         for (int v = 0; v < G.V(); ++v) {
             all[v] = new DijkstraSP(G, v);
