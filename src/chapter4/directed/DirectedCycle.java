@@ -1,11 +1,12 @@
 package chapter4.directed;
 
-import java.util.Stack;
+import java.util.Deque;
+import java.util.LinkedList;
 
 public class DirectedCycle {
     private boolean[] marked;
     private int[] edgeTo;
-    private Stack<Integer> cycle;   // 有向环中的所有顶点（如果存在）
+    private Deque<Integer> cycle;   // 有向环中的所有顶点（如果存在）
     private boolean[] onStack;      // 递归调用的栈上的所有顶点
 
     public DirectedCycle(Digraph G) {
@@ -26,7 +27,7 @@ public class DirectedCycle {
                 edgeTo[w] = v;
                 dfs(G, w);
             } else if (onStack[w]) {
-                cycle = new Stack<>();
+                cycle = new LinkedList<>();
                 for (int x = v; x != w; x = edgeTo[x]) {
                     cycle.push(x);
                 }
