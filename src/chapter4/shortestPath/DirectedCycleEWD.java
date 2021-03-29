@@ -5,13 +5,13 @@ import java.util.LinkedList;
 
 public class DirectedCycleEWD {
     private final boolean[] marked;
-    private final int[] edgeTo;
-    private Deque<Integer> cycle;   // 有向环中的所有顶点（如果存在）
+    private final DirectedEdge[] edgeTo;
+    private Deque<DirectedEdge> cycle;   // 有向环中的所有顶点（如果存在）
     private final boolean[] onStack;      // 递归调用的栈上的所有顶点
 
     public DirectedCycleEWD(EdgeWeightedDigraph G) {
         marked = new boolean[G.V()];
-        edgeTo = new int[G.V()];
+        edgeTo = new DirectedEdge[G.V()];
         onStack = new boolean[G.V()];
         for (int v = 0; v < G.V(); ++v) {
             if (!marked[v]) dfs(G, v);
@@ -25,15 +25,16 @@ public class DirectedCycleEWD {
             int w = e.to();
             if (hasCycle()) return;
             else if (!marked[w]) {
-                edgeTo[w] = v;
+                edgeTo[w] = e;
                 dfs(G, w);
             } else if (onStack[w]) {
                 cycle = new LinkedList<>();
-                for (int x = v; x != w; x = edgeTo[x]) {
+                DirectedEdge x = e;
+                while (x.from() != w) {
                     cycle.push(x);
+                    x = edgeTo[x.from()];
                 }
-                cycle.push(w);
-                cycle.push(v);
+                cycle.push(x);
             }
         }
         onStack[v] = false;
@@ -45,7 +46,7 @@ public class DirectedCycleEWD {
     }
 
     // 有向环中的所有顶点（如果存在）
-    public Iterable<Integer> cycle() {
+    public Iterable<DirectedEdge> cycle() {
         return cycle;
     }
 }
